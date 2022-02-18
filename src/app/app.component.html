@@ -1,7 +1,16 @@
 <h1>Afazeres</h1>
 <ul>
   <li *ngFor="let todo of todoList">{{todo.id}} {{ todo.mensagem }}
-    <button>Feito!</button>
-    <button>Excluir</button>
+    <button *ngIf="!todo.finalizado" (click)="alteraStatusTarefa(todo, true)">Feito</button>
+    <button *ngIf="todo.finalizado" (click)="alteraStatusTarefa(todo, false)">Refazer</button>
+    <button *ngIf="todo.finalizado" (click)="excluiTarefa(todo)">Excluir</button>
   </li>
 </ul>
+
+<form [formGroup]="form">
+  <fieldset>
+    <input type="text" formControlName="title">
+    <p *ngIf="form.controls.title.invalid && !form.controls.title.pristine">pelo menos 3 caracteres</p>
+    <button [disabled]="form.invalid">Adicionar</button>
+  </fieldset>
+</form>
