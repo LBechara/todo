@@ -5,12 +5,15 @@
     <button *ngIf="todo.finalizado" (click)="alteraStatusTarefa(todo, false)">Refazer</button>
     <button *ngIf="todo.finalizado" (click)="excluiTarefa(todo)">Excluir</button>
   </li>
+  <p *ngIf="!todoList.length">Sem tarefas</p>
 </ul>
 
 <form [formGroup]="form">
   <fieldset>
-    <input type="text" formControlName="title">
+    <input type="text" placeholder="escreva aqui sua tarefa" formControlName="title">
     <p *ngIf="form.controls.title.invalid && !form.controls.title.pristine">pelo menos 3 caracteres</p>
-    <button [disabled]="form.invalid">Adicionar</button>
+    <button [disabled]="form.invalid" (click)="adicionarTarefa()">Adicionar</button>
   </fieldset>
 </form>
+
+<button (click)="limparLocalStorage()">limpar local storage</button>

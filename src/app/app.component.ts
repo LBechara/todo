@@ -18,16 +18,27 @@ export class AppComponent implements OnInit{
         Validators.required
       ])]
     })
-    this.todoList.push(new Todo( 1, 'ir a feira', false))
-    this.todoList.push(new Todo( 2, 'curar da covid', false))
-    this.todoList.push(new Todo( 3, 'escovar os dentes', true))
   }
 
   ngOnInit(): void {
+    this.getListLocalStorage()
+  }
+
+  adicionarTarefa() {
+    const tarefa = this.form.value.title;
+    const id = this.todoList.length + 1
+    this.todoList.push(new Todo(id, tarefa, false))
+    this.salvarTarefas()
+    this.resetForm()
+  }
+
+  resetForm() {
+    this.form.reset()
   }
 
   alteraStatusTarefa(tarefa: Todo, feito: boolean): void {
     tarefa.finalizado = feito
+    this.salvarTarefas()
   }
 
   excluiTarefa(tarefa: Todo) {
@@ -35,5 +46,29 @@ export class AppComponent implements OnInit{
     if(index != -1) {
       this.todoList.splice(index, 1)
     }
+    this.salvarTarefas()
+  }
+
+  salvarTarefas() {
+    this.atualizarIds()
+    const data = JSON.stringify(this.todoList)
+    localStorage.setItem('todoList', data)
+  }
+
+  limparLocalStorage() {
+    localStorage.clear()
+  }
+
+  getListLocalStorage() {
+    if(localStorage.getItem('todoList')) {
+      const data = localStorage.getItem('todoList')
+      this.todoList = JSON.parse(data || '{}')
+    }
+  }
+
+  atualizarIds() {
+    this.todoList.forEach((item, index) => {
+      item.id=index + 1
+    })
   }
 }
