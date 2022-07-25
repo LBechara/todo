@@ -12,7 +12,7 @@
   <fieldset>
     <input type="text" placeholder="escreva aqui sua tarefa" formControlName="title">
     <p *ngIf="form.controls.title.invalid && !form.controls.title.pristine">pelo menos 3 caracteres</p>
-    <button [disabled]="form.invalid" (click)="adicionarTarefa()">Adicionar</button>
+    <button [disabled]="form.invalid" (click)="adicionarTarefa()">Add</button>
   </fieldset>
 </form>
 
