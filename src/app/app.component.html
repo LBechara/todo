@@ -1,19 +1,27 @@
-<h1>Afazeres</h1>
-<ul>
-  <li *ngFor="let todo of todoList">{{todo.id}} {{ todo.mensagem }}
-    <button *ngIf="!todo.finalizado" (click)="alteraStatusTarefa(todo, true)">Feito</button>
-    <button *ngIf="todo.finalizado" (click)="alteraStatusTarefa(todo, false)">Refazer</button>
-    <button *ngIf="todo.finalizado" (click)="excluiTarefa(todo)">Excluir</button>
-  </li>
-  <p *ngIf="!todoList.length">Sem tarefas</p>
-</ul>
-
-<form [formGroup]="form">
-  <fieldset>
-    <input type="text" placeholder="escreva aqui sua tarefa" formControlName="title">
-    <p *ngIf="form.controls.title.invalid && !form.controls.title.pristine">pelo menos 3 caracteres</p>
-    <button [disabled]="form.invalid" (click)="adicionarTarefa()">Add</button>
-  </fieldset>
-</form>
-
-<button (click)="limparLocalStorage()">limpar local storage</button>
+<main class="container">
+  <h1 class="title">to-do list</h1>
+  <div class="todo">
+    <ul class="list" *ngFor="let todo of todoList">
+      <li class="element" >{{todo.id}} - {{ todo.mensagem }}
+      </li>
+      <div class="buttons">
+        <button class="btn-done" *ngIf="!todo.finalizado" (click)="alteraStatusTarefa(todo, true)">done</button>
+        <button class="btn-delete" *ngIf="todo.finalizado" (click)="excluiTarefa(todo)">delete</button>
+        <button class="btn-redo" *ngIf="todo.finalizado" (click)="alteraStatusTarefa(todo, false)">re-do</button>
+      </div>
+    </ul>
+    <p class="text-no-task" *ngIf="!todoList.length">No tasks so far :(</p>
+  </div>
+  
+  <div class="form">
+    <form [formGroup]="form">
+      <fieldset>
+        <input class="input" type="text" placeholder="type your task here" formControlName="title">
+        <span class="text-error" *ngIf="form.controls.title.invalid && !form.controls.title.pristine">at least 3 characters</span>
+        <button class="btn-add" [disabled]="form.invalid" (click)="adicionarTarefa()">Add</button>
+      </fieldset>
+    </form>
+  </div>
+  
+  <button class="btn-clear" (click)="limparLocalStorage()">Clear local storage</button>
+</main>
