@@ -32,6 +32,7 @@
           align-items: center;
           flex-direction: row;
           .btn-done, .btn-redo, .btn-delete{
+            cursor: pointer;
             border: 0px;
             border-radius: $s;
             font-size: $m;
