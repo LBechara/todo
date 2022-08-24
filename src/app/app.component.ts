@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Todo } from 'src/model/todo.model';
 
 @Component({
@@ -9,9 +9,9 @@ import { Todo } from 'src/model/todo.model';
 })
 export class AppComponent implements OnInit{
   todoList: Todo[] = []
-  form: FormGroup | any
+  form: UntypedFormGroup | any
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: UntypedFormBuilder) {
     this.form = this.formBuilder.group({
       title: ['', Validators.compose([
         Validators.minLength(3),
@@ -57,6 +57,7 @@ export class AppComponent implements OnInit{
 
   limparLocalStorage() {
     localStorage.clear()
+    location.reload()
   }
 
   getListLocalStorage() {
