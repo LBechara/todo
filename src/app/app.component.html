@@ -1,14 +1,15 @@
 <main class="container">
   <h1 class="title">to-do list</h1>
   <div class="todo">
-    <ul class="list" *ngFor="let todo of todoList">
-      <li class="element" >{{todo.id}} - {{ todo.mensagem }}
+    <ul class="list">
+      <li class="element" *ngFor="let todo of todoList">
+        <p class="text"><span class="enum">{{todo.id}} -</span> {{ todo.mensagem }}</p>
+        <div class="buttons">
+          <a class="btn-done" *ngIf="!todo.finalizado" (click)="alteraStatusTarefa(todo, true)"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="check"></mat-icon></a>
+          <a class="btn-delete" *ngIf="todo.finalizado" (click)="excluiTarefa(todo)"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="delete"></mat-icon></a>
+          <a class="btn-redo" *ngIf="todo.finalizado" (click)="alteraStatusTarefa(todo, false)"><mat-icon aria-hidden="false" aria-label="Example home icon" fontIcon="undo"></mat-icon></a>
+        </div>
       </li>
-      <div class="buttons">
-        <button class="btn-done" *ngIf="!todo.finalizado" (click)="alteraStatusTarefa(todo, true)">done</button>
-        <button class="btn-delete" *ngIf="todo.finalizado" (click)="excluiTarefa(todo)">delete</button>
-        <button class="btn-redo" *ngIf="todo.finalizado" (click)="alteraStatusTarefa(todo, false)">re-do</button>
-      </div>
     </ul>
     <p class="text-no-task" *ngIf="!todoList.length">No tasks so far :(</p>
   </div>
@@ -18,10 +19,10 @@
       <fieldset>
         <input class="input" type="text" placeholder="type your task here" formControlName="title">
         <span class="text-error" *ngIf="form.controls.title.invalid && !form.controls.title.pristine">at least 3 characters</span>
-        <button class="btn-add" [disabled]="form.invalid" (click)="adicionarTarefa()">Add</button>
+        <button class="btn-add" [disabled]="form.invalid" (click)="adicionarTarefa()" mat-raised-button>Add</button>
       </fieldset>
     </form>
   </div>
   
-  <button class="btn-clear" (click)="limparLocalStorage()">Clear local storage</button>
+  <button class="btn-clear" (click)="limparLocalStorage()" mat-raised-button>Clear all</button>
 </main>

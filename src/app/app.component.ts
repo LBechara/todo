@@ -57,6 +57,7 @@ export class AppComponent implements OnInit{
 
   limparLocalStorage() {
     localStorage.clear()
+    location.reload()
   }
 
   getListLocalStorage() {

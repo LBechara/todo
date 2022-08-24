@@ -7,7 +7,7 @@
   align-items: center;
   margin: 0px 30vw;
   padding-top: 10vh;
-  color: $lightBlue;
+  color: $white;
   font-family: $roboto;
   .title {
     font-weight: 600;
@@ -16,33 +16,47 @@
   }
   .todo {
     margin-bottom: $ll;
-    width: 40vw;
+    flex-direction: column;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
     .list {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      width: 500px;
       .element {
+        display: flex;
+        justify-content: space-between;
         font-size: $l;
         margin-bottom: $m;
-      }
-      .buttons {
-        margin-left: $m;
-        .btn-done, .btn-redo, .btn-delete{
-          background-color: $lightPurple;
-          color: $grey;
-          border: 0px;
-          border-radius: $s;
-          font-size: $m;
-          padding: 0px $s;
-          margin-left: $m;
+        .buttons {
+          max-width: 72px;
+          display: flex;
+          align-items: center;
+          flex-direction: row;
+          .btn-done, .btn-redo, .btn-delete{
+            border: 0px;
+            border-radius: $s;
+            font-size: $m;
+            padding: 0px $s;
+          }
+          .btn-delete {
+            color: $red;
+          }
         }
       }
     }
   }
 
-
+  .form {
+    position: relative;
+    .input {
+      padding: $s;
+      margin: $m;
+      width: 400px;
+    }
+    .text-error {
+      position: absolute;
+      left: 25px;
+      top: -5px;
+      color: $white;
+    }
+  }
 }
