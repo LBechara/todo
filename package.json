@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "buildgh": "ng build --output-path docs --base-href /todo/",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
